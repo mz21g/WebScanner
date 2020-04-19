@@ -685,7 +685,7 @@ class WelcomePane(QMainWindow):
             self.__ui.start_OSscan_btn.setText("请输入正确格式的主机地址")
 
     def method1_ping(self, host):
-        ans, uans = sr(IP(dst="192.168.43.224")/ICMP(), timeout=5, verbose=False)
+        ans, uans = sr(IP(dst=host) / ICMP(), timeout=5, verbose=False)
         if len(ans) == 0:
             print("对方没有相应ICMP包")
             self.__ui.OSscan_textBrowser.append(
@@ -883,6 +883,12 @@ class WelcomePane(QMainWindow):
         print("Windows系列概率: ", str(windows_rate))
         self.__ui.OSscan_textBrowser.append(
             "<font color='#25ee24'>" + "Windows系列概率: " + str(windows_rate) + "</font>")
+
+        self.os_active_port = []
+        self.os_inactive_port = []
+        self.os_windows_rate = 0
+        self.os_linux_rate = 0
+        self.os_is_linux = []
 
         t2 = time.time()
         run_time = t2 - t1
