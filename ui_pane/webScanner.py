@@ -94,6 +94,7 @@ class WelcomePane(QMainWindow):
         arp_queue = Queue()
         for ip in ip_list:
             self.__ui.statusbar.showMessage("当前任务: 正在探测" + ip)
+            # scan = multiprocessing.Process(target=arp_request, args=(ip, arp_queue))
             scan = threading.Thread(target=arp_request, args=(ip, arp_queue))
             time.sleep(0.1)
             scan.start()
