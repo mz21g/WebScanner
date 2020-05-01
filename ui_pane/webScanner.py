@@ -9,7 +9,7 @@ import shodan
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QMessageBox, QListWidgetItem, QDialog
-from scapy.layers.inet import IP, ICMP, TCP
+from scapy.layers.inet import IP, ICMP, TCP, UDP
 from scapy.sendrecv import sr1, sr
 
 from resources.UI.welcome_ui import Ui_MainWindow
@@ -836,66 +836,95 @@ class WelcomePane(QMainWindow):
         except Exception as e:
             pass
 
+    def method6_tos(self, host, inactive_port_list):
+        try:
+            for port in inactive_port_list:
+                ans, uans = sr(IP(dst=host) / UDP(dport=port), timeout=0.08, verbose=False)
+                if len(ans) > 0:
+                    tos_val = ans[0][1].fields['tos']
+                    print("tos: " + hex(tos_val))
+                    self.__ui.OSscan_textBrowser.append(
+                        "<font color='#25ee24'>" + "tos: " + hex(tos_val) + "</font>")
+                    if int(tos_val) == 0xC0:
+                        print("对于ICMP的“端口不可达”信息，经过对返回包的TOS值的检查，tos值为0xC0，操作系统推测结果:Linux系列")
+                        self.__ui.OSscan_textBrowser.append(
+                            "<font color='#25ee24'>" + "对于ICMP的“端口不可达”信息，经过对返回包的TOS值的检查"
+                                                       "，tos值为0xC0，操作系统推测结果:Linux系列</font>")
+                        self.os_is_linux.append(1)
+                        break
+                    elif int(tos_val) == 0:
+                        print("对于ICMP的“端口不可达”信息，经过对返回包的TOS值的检查，tos值为0，操作系统推测结果:Windows系列")
+                        self.__ui.OSscan_textBrowser.append(
+                            "<font color='#25ee24'>" + "对于ICMP的“端口不可达”信息，经过对返回包的TOS值的检查"
+                                                       "，tos值为0，操作系统推测结果:Windows系列</font>")
+                        self.os_is_linux.append(0)
+                    break
+        except Exception as e:
+            pass
+
     def start_OSscan(self):
+        try:
+            host = self.__ui.OSAdd_lnEd.text()
+            print("正在探测: " + str(host))
+            self.__ui.OSscan_textBrowser.append(
+                "<font color='#ffe7d1'>" + "正在探测" + host + "请稍等>>>>>" + "</font><br/><br/>")
+            t1 = time.time()
 
-        host = self.__ui.OSAdd_lnEd.text()
-        print("正在探测: " + str(host))
-        self.__ui.OSscan_textBrowser.append(
-            "<font color='#ffe7d1'>" + "正在探测" + host + "请稍等>>>>>" + "</font><br/><br/>")
-        t1 = time.time()
+            self.method1_ping(host)
+            self.os_port_scan(host)
 
-        self.method1_ping(host)
-        self.os_port_scan(host)
+            for i in range(1, 11):
+                if i not in self.os_active_port:
+                    self.os_inactive_port.append(i)
 
-        for i in range(1, 11):
-            if i not in self.os_active_port:
-                self.os_inactive_port.append(i)
+            print("开放端口: " + str(self.os_active_port))
+            self.__ui.OSscan_textBrowser.append(
+                "<font color='#25ee24'>" + "开放端口: " + str(self.os_active_port) + "</font>")
 
-        print("开放端口: " + str(self.os_active_port))
-        self.__ui.OSscan_textBrowser.append(
-            "<font color='#25ee24'>" + "开放端口: " + str(self.os_active_port) + "</font>")
+            print("不开放端口: " + str(self.os_inactive_port), "...")
+            self.__ui.OSscan_textBrowser.append(
+                "<font color='#25ee24'>" + "不开放端口: " + str(self.os_inactive_port) + "..." + "</font>")
 
-        print("不开放端口: " + str(self.os_inactive_port), "...")
-        self.__ui.OSscan_textBrowser.append(
-            "<font color='#25ee24'>" + "不开放端口: " + str(self.os_inactive_port) + "..." + "</font>")
+            self.method2_fin(host, self.os_active_port)
+            self.method3_syn(host, self.os_active_port)
+            self.method4_window(host, self.os_active_port)
+            self.method5_ack(host, self.os_inactive_port)
+            self.method6_tos(host, self.os_inactive_port)
 
-        self.method2_fin(host, self.os_active_port)
-        self.method3_syn(host, self.os_active_port)
-        self.method4_window(host, self.os_active_port)
-        self.method5_ack(host, self.os_inactive_port)
+            num = len(self.os_is_linux)
+            for os in self.os_is_linux:
+                if os == 0:
+                    self.os_windows_rate += 1
+                elif os == 1:
+                    self.os_linux_rate += 1
+            windows_rate = round((self.os_windows_rate / num) * 100, 3)
+            linux_rate = round((self.os_linux_rate / num) * 100, 3)
 
-        num = len(self.os_is_linux)
-        for os in self.os_is_linux:
-            if os == 0:
-                self.os_windows_rate += 1
-            elif os == 1:
-                self.os_linux_rate += 1
-        windows_rate = round((self.os_windows_rate / num) * 100, 3)
-        linux_rate = round((self.os_linux_rate / num) * 100, 3)
+            print("最终结果：")
+            self.__ui.OSscan_textBrowser.append(
+                "<font color='#25ee24'>" + "最终结果: </font>")
 
-        print("最终结果：")
-        self.__ui.OSscan_textBrowser.append(
-            "<font color='#25ee24'>" + "最终结果: </font>")
+            print("Linux系列概率: " + str(linux_rate))
+            self.__ui.OSscan_textBrowser.append(
+                "<font color='#25ee24'>" + "Linux系列概率: " + str(linux_rate) + "</font>")
 
-        print("Linux系列概率: " + str(linux_rate))
-        self.__ui.OSscan_textBrowser.append(
-            "<font color='#25ee24'>" + "Linux系列概率: " + str(linux_rate) + "</font>")
+            print("Windows系列概率: ", str(windows_rate))
+            self.__ui.OSscan_textBrowser.append(
+                "<font color='#25ee24'>" + "Windows系列概率: " + str(windows_rate) + "</font>")
 
-        print("Windows系列概率: ", str(windows_rate))
-        self.__ui.OSscan_textBrowser.append(
-            "<font color='#25ee24'>" + "Windows系列概率: " + str(windows_rate) + "</font>")
+            self.os_active_port = []
+            self.os_inactive_port = []
+            self.os_windows_rate = 0
+            self.os_linux_rate = 0
+            self.os_is_linux = []
 
-        self.os_active_port = []
-        self.os_inactive_port = []
-        self.os_windows_rate = 0
-        self.os_linux_rate = 0
-        self.os_is_linux = []
-
-        t2 = time.time()
-        run_time = t2 - t1
-        print('共计用时: ', round(run_time, 2))
-        self.__ui.OSscan_textBrowser.append("<br/><font color='#ffe7d1'>" + "----------共计用时: " + str(
-            round(run_time, 2)) + " s--------------" + "</font><br/><br/>")
+            t2 = time.time()
+            run_time = t2 - t1
+            print('共计用时: ', round(run_time, 2))
+            self.__ui.OSscan_textBrowser.append("<br/><font color='#ffe7d1'>" + "----------共计用时: " + str(
+                round(run_time, 2)) + " s--------------" + "</font><br/><br/>")
+        except Exception as e:
+            pass
 
     # FTP弱口令检测
     def get_ftpIp(self):
