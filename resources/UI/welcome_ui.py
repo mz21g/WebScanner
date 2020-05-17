@@ -15,11 +15,17 @@ from utensil.ftp_list import QFtp_list
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(830, 600)
+        MainWindow.setMinimumSize(QtCore.QSize(830, 600))
+        MainWindow.setMaximumSize(QtCore.QSize(830, 643))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setMinimumSize(QtCore.QSize(830, 600))
+        self.centralwidget.setMaximumSize(QtCore.QSize(830, 600))
         self.centralwidget.setObjectName("centralwidget")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(0, 10, 800, 600))
+        self.tabWidget.setGeometry(QtCore.QRect(0, 10, 830, 575))
+        self.tabWidget.setMinimumSize(QtCore.QSize(830, 575))
+        self.tabWidget.setMaximumSize(QtCore.QSize(830, 570))
         self.tabWidget.setStyleSheet("QTabWidget::pane\n"
                                      "{\n"
                                      "    font: 18pt \"Trebuchet MS\";\n"
@@ -646,10 +652,87 @@ class Ui_MainWindow(object):
                                  "border-image: url(:/background/images/background/webscan.jpg);\n"
                                  "}")
         self.tab_7.setObjectName("tab_7")
+        self.label_21 = QtWidgets.QLabel(self.tab_7)
+        self.label_21.setGeometry(QtCore.QRect(30, 20, 81, 21))
+        self.label_21.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                    "font: 18pt \"Al Bayan\";")
+        self.label_21.setObjectName("label_21")
+        self.SqlInjuAdd_lnEd = QtWidgets.QLineEdit(self.tab_7)
+        self.SqlInjuAdd_lnEd.setGeometry(QtCore.QRect(140, 20, 491, 21))
+        self.SqlInjuAdd_lnEd.setStyleSheet("background-color: rgba(255,255,255,0.2);\n"
+                                           "color: rgb(255, 255, 255);\n"
+                                           "border: 1px solid white;\n"
+                                           "border-radius: 10px;")
+        self.SqlInjuAdd_lnEd.setObjectName("SqlInjuAdd_lnEd")
+        self.clear_SqlInjuScan_btn = QtWidgets.QPushButton(self.tab_7)
+        self.clear_SqlInjuScan_btn.setGeometry(QtCore.QRect(680, 20, 121, 31))
+        self.clear_SqlInjuScan_btn.setStyleSheet("QPushButton{\n"
+                                                 "    color: rgb(238, 243, 243);\n"
+                                                 "    font: 18pt \"Al Bayan\";\n"
+                                                 "    border: 1px solid white;\n"
+                                                 "    border-radius: 10px;\n"
+                                                 "}\n"
+                                                 "QPushButton:hover{\n"
+                                                 "    background-color: rgba(254, 162, 28, 0.7);\n"
+                                                 "}\n"
+                                                 "QPushButton:pressed{\n"
+                                                 "    background-color: rgba(254, 162, 28, 0.8);\n"
+                                                 "}")
+        self.clear_SqlInjuScan_btn.setObjectName("clear_SqlInjuScan_btn")
+        self.start_SqlInjuScan_btn = QtWidgets.QPushButton(self.tab_7)
+        self.start_SqlInjuScan_btn.setEnabled(False)
+        self.start_SqlInjuScan_btn.setGeometry(QtCore.QRect(30, 140, 771, 31))
+        self.start_SqlInjuScan_btn.setStyleSheet("QPushButton{\n"
+                                                 "    background-color: rgba(254, 162, 28, 0.6);\n"
+                                                 "    color: rgb(238, 243, 243);\n"
+                                                 "    font: 18pt \"Al Bayan\";\n"
+                                                 "}\n"
+                                                 "QPushButton:hover{\n"
+                                                 "    background-color: rgba(254, 162, 28, 0.7);\n"
+                                                 "}\n"
+                                                 "QPushButton:pressed{\n"
+                                                 "    background-color: rgba(254, 162, 28, 0.8);\n"
+                                                 "}\n"
+                                                 "QPushButton:disabled{\n"
+                                                 "    background-color: rgb(159, 159, 159);\n"
+                                                 "}")
+        self.start_SqlInjuScan_btn.setObjectName("start_SqlInjuScan_btn")
+        self.SqlInjuScan_textBrowser = QtWidgets.QTextBrowser(self.tab_7)
+        self.SqlInjuScan_textBrowser.setGeometry(QtCore.QRect(20, 180, 791, 341))
+        self.SqlInjuScan_textBrowser.setStyleSheet("QTextBrowser{\n"
+                                                   "    color: rgb(37, 238, 36);\n"
+                                                   "    font: 18pt \"Trebuchet MS\";\n"
+                                                   "    background-color: rgba(166, 161, 142, 0.6);\n"
+                                                   "}")
+        self.SqlInjuScan_textBrowser.setObjectName("SqlInjuScan_textBrowser")
+        self.label_22 = QtWidgets.QLabel(self.tab_7)
+        self.label_22.setGeometry(QtCore.QRect(30, 60, 101, 21))
+        self.label_22.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                    "font: 18pt \"Al Bayan\";")
+        self.label_22.setObjectName("label_22")
+        self.label_23 = QtWidgets.QLabel(self.tab_7)
+        self.label_23.setGeometry(QtCore.QRect(30, 100, 81, 21))
+        self.label_23.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                    "font: 18pt \"Al Bayan\";")
+        self.label_23.setObjectName("label_23")
+        self.SqlInjuUserAgent_lnEd = QtWidgets.QLineEdit(self.tab_7)
+        self.SqlInjuUserAgent_lnEd.setGeometry(QtCore.QRect(140, 60, 491, 21))
+        self.SqlInjuUserAgent_lnEd.setStyleSheet("background-color: rgba(255,255,255,0.2);\n"
+                                                 "color: rgb(255, 255, 255);\n"
+                                                 "border: 1px solid white;\n"
+                                                 "border-radius: 10px;")
+        self.SqlInjuUserAgent_lnEd.setObjectName("SqlInjuUserAgent_lnEd")
+        self.SqlInjuCookie_lnEd = QtWidgets.QLineEdit(self.tab_7)
+        self.SqlInjuCookie_lnEd.setGeometry(QtCore.QRect(140, 100, 491, 21))
+        self.SqlInjuCookie_lnEd.setStyleSheet("background-color: rgba(255,255,255,0.2);\n"
+                                              "color: rgb(255, 255, 255);\n"
+                                              "border: 1px solid white;\n"
+                                              "border-radius: 10px;")
+        self.SqlInjuCookie_lnEd.setObjectName("SqlInjuCookie_lnEd")
         self.tabWidget.addTab(self.tab_7, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 830, 22))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -687,6 +770,9 @@ class Ui_MainWindow(object):
         self.OSAdd_lnEd.textChanged['QString'].connect(MainWindow.enable_startOSscan_btn)
         self.clear_OSscan_btn.clicked.connect(MainWindow.clear_OSscan_TestBrowser)
         self.start_OSscan_btn.clicked.connect(MainWindow.start_OSscan)
+        self.SqlInjuAdd_lnEd.textChanged['QString'].connect(MainWindow.enable_SqlInjuScan_btn)
+        self.start_SqlInjuScan_btn.clicked.connect(MainWindow.start_SqlInjuScan)
+        self.clear_SqlInjuScan_btn.clicked.connect(MainWindow.clear_SqlInjuScan_TestBrowser)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -771,6 +857,11 @@ class Ui_MainWindow(object):
         self.ftp_invs_pass_btn.setText(_translate("MainWindow", "..."))
         self.label_19.setText(_translate("MainWindow", "已爆破主机"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), _translate("MainWindow", "FTP弱口令检测"))
+        self.label_21.setText(_translate("MainWindow", "网址url"))
+        self.clear_SqlInjuScan_btn.setText(_translate("MainWindow", "清空"))
+        self.start_SqlInjuScan_btn.setText(_translate("MainWindow", "请输入正确格式的主机地址"))
+        self.label_22.setText(_translate("MainWindow", "User-Agent"))
+        self.label_23.setText(_translate("MainWindow", "Cookie"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_7), _translate("MainWindow", "SQL注入检测"))
 
 

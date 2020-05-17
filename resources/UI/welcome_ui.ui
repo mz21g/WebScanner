@@ -6,22 +6,58 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>830</width>
     <height>600</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>830</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>830</width>
+    <height>643</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="minimumSize">
+    <size>
+     <width>830</width>
+     <height>600</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>830</width>
+     <height>600</height>
+    </size>
+   </property>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>10</y>
-      <width>800</width>
-      <height>600</height>
+      <width>830</width>
+      <height>575</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>830</width>
+      <height>575</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>830</width>
+      <height>570</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">QTabWidget::pane
@@ -1478,6 +1514,181 @@ border-image: url(:/background/images/background/webscan.jpg);
      <attribute name="title">
       <string>SQL注入检测</string>
      </attribute>
+     <widget class="QLabel" name="label_21">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+font: 18pt &quot;Al Bayan&quot;;</string>
+      </property>
+      <property name="text">
+       <string>网址url</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="SqlInjuAdd_lnEd">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>20</y>
+        <width>491</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255,255,255,0.2);
+color: rgb(255, 255, 255);
+border: 1px solid white;
+border-radius: 10px;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="clear_SqlInjuScan_btn">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>20</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	color: rgb(238, 243, 243);
+	font: 18pt &quot;Al Bayan&quot;;
+	border: 1px solid white;
+	border-radius: 10px;
+}
+QPushButton:hover{
+	background-color: rgba(254, 162, 28, 0.7);
+}
+QPushButton:pressed{
+	background-color: rgba(254, 162, 28, 0.8);
+}</string>
+      </property>
+      <property name="text">
+       <string>清空</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="start_SqlInjuScan_btn">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>140</y>
+        <width>771</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	background-color: rgba(254, 162, 28, 0.6);
+	color: rgb(238, 243, 243);
+	font: 18pt &quot;Al Bayan&quot;;
+}
+QPushButton:hover{
+	background-color: rgba(254, 162, 28, 0.7);
+}
+QPushButton:pressed{
+	background-color: rgba(254, 162, 28, 0.8);
+}
+QPushButton:disabled{
+	background-color: rgb(159, 159, 159);
+}</string>
+      </property>
+      <property name="text">
+       <string>请输入正确格式的主机地址</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="SqlInjuScan_textBrowser">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>180</y>
+        <width>791</width>
+        <height>341</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextBrowser{
+	color: rgb(37, 238, 36);
+	font: 18pt &quot;Trebuchet MS&quot;;
+	background-color: rgba(166, 161, 142, 0.6);
+}</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_22">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>60</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+font: 18pt &quot;Al Bayan&quot;;</string>
+      </property>
+      <property name="text">
+       <string>User-Agent</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_23">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>100</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+font: 18pt &quot;Al Bayan&quot;;</string>
+      </property>
+      <property name="text">
+       <string>Cookie</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="SqlInjuUserAgent_lnEd">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>60</y>
+        <width>491</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255,255,255,0.2);
+color: rgb(255, 255, 255);
+border: 1px solid white;
+border-radius: 10px;</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="SqlInjuCookie_lnEd">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>100</y>
+        <width>491</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255,255,255,0.2);
+color: rgb(255, 255, 255);
+border: 1px solid white;
+border-radius: 10px;</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -1486,7 +1697,7 @@ border-image: url(:/background/images/background/webscan.jpg);
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>830</width>
      <height>22</height>
     </rect>
    </property>
@@ -1961,6 +2172,54 @@ border-image: url(:/background/images/background/webscan.jpg);
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>SqlInjuAdd_lnEd</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>enable_SqlInjuScan_btn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>351</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>383</x>
+     <y>-23</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>start_SqlInjuScan_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>start_SqlInjuScan()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>409</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>437</x>
+     <y>-11</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clear_SqlInjuScan_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>clear_SqlInjuScan_TestBrowser()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>732</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>645</x>
+     <y>-24</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>clear_hostScan_TestBrowser()</slot>
@@ -1992,5 +2251,8 @@ border-image: url(:/background/images/background/webscan.jpg);
   <slot>enable_startOSscan_btn()</slot>
   <slot>clear_OSscan_TestBrowser()</slot>
   <slot>start_OSscan()</slot>
+  <slot>enable_SqlInjuScan_btn()</slot>
+  <slot>start_SqlInjuScan()</slot>
+  <slot>clear_SqlInjuScan_TestBrowser()</slot>
  </slots>
 </ui>
