@@ -692,7 +692,8 @@ class GetFTPHost(QtCore.QThread):
         super(GetFTPHost, self).__init__(parent)
 
     def run(self):
-        SHODAN_API_KEY = "JBk8vtewlHrlSumHI28PfcSWVTCyJYPl"
+        """在这里输入你自己的shodan的key，没有需要自己在网站注册"""
+        SHODAN_API_KEY = ""
         api = shodan.Shodan(SHODAN_API_KEY)
         try:
             # 搜索 Shodan
