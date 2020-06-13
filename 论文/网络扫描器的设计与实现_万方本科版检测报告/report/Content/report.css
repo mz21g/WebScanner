@@ -1,0 +1,160 @@
+﻿body {
+    background-color: #f0f0f0 !important;
+    font-family: 'Microsoft YaHei' !important;
+}
+
+.title {
+    color: #14819d;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.report-wrapper {
+    margin: 15px auto 20px auto;
+    position: static;
+    width: 1020px; /*970px*/
+    background-color: white;
+}
+
+.report-container {
+    padding: 40px 60px 20px 60px;
+    /*min-height: 1172px;*/
+    position: relative;
+    background-color: #fff;
+    border-bottom: 1px solid #d9d9d9;
+    -webkit-box-shadow: 0px 1px 6px #ccc;
+    -moz-box-shadow: 0px 1px 6px #ccc;
+    -ms-box-shadow: 0px 1px 6px #ccc;
+    -o-box-shadow: 0px 1px 6px #ccc;
+    box-shadow: 0px 1px 6px #ccc;
+}
+
+h2 {
+    font-size: 18px !important;
+    color: #14819d !important;
+    border-bottom: solid 1px #ddd;
+    line-height: 30px !important;
+    font-weight: bold !important;
+}
+
+.hr-header {
+    border-top: 2px solid #348da5;
+    margin-bottom: 10px;
+}
+
+.hr-footer {
+    border-top: 3px solid #348da5;
+    border-bottom: 1px solid #348da5;
+    height: 2px;
+    margin-bottom: 10px;
+}
+
+.report-footer {
+    margin-bottom: 10px;
+}
+
+    .report-footer p {
+        color: #14819d;
+        text-align: center;
+        margin: 0 0 3px;
+        font-weight: bold;
+    }
+
+.graph-originaltotal {
+    font-size: 14px;
+    color: #26B1C1;
+    font-weight: bold;
+}
+
+    .graph-originaltotal .label {
+        height: 30px;
+        padding: 5px 15px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+
+.label-main {
+    background-color: #26B1C1;
+}
+
+/********** 与业务相关 **********/
+
+/* 参考文献相似 */
+.text-reference {
+    color: #7cd6a9;
+}
+
+.bg-reference {
+    background-color: #7cd6a9;
+}
+
+/* 已发表论文相似 */
+.text-published {
+    color: #399cc3;
+}
+
+.bg-published {
+    background-color: #399cc3;
+}
+
+/* 剩余相似 */
+.text-others {
+    color: #ff7373;
+}
+
+.bg-others {
+    background-color: #ff7373;
+}
+
+/* 学位论文相似 */
+.text-degree {
+    color: #ffb82a;
+}
+
+.bg-degree {
+    background-color: #ffb82a;
+}
+
+/* 无版权 */
+.text-nocopyright {
+    color: grey;
+}
+
+.bg-nocopyright {
+    background-color: grey;
+}
+
+/* 高亮 */
+.text-highlight {
+    color: blue;
+}
+
+    .text-highlight .active {
+        color: blue;
+    }
+
+
+
+/* 小表格 */
+.table-sm {
+    width: 600px;
+    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .table-sm > thead > tr > th, .table-sm > tbody > tr > td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 12px;
+        font-weight: normal;
+        border-bottom-width: 1px;
+        border: none;
+    }
+
+    .table-sm > thead > tr > th {
+        background-color: #eaeaea;
+        text-align: center;
+    }
